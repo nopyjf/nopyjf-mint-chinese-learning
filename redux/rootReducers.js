@@ -1,11 +1,13 @@
 
 import { combineReducers } from "redux";
-import landingTextFieldReducer from "./landing/reducer/landingTextFieldReducer";
+import editTextFieldReducer from "./landing/reducer/editTextFieldReducer";
+import gameWordListReducer from "./landing/reducer/gameWordListReducer";
 import landingWordListReducer from "./landing/reducer/landingWordListReducer";
 
 const rootReducer = combineReducers({
     landingWordListReducer: landingWordListReducer,
-    landingTextFieldReducer: landingTextFieldReducer
+    editTextFieldReducer: editTextFieldReducer,
+    gameWordListReducer: gameWordListReducer
 })
 
 export default rootReducer

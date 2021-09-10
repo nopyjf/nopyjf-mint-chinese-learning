@@ -1,7 +1,7 @@
-import Landing from '../components/landing/Landing';
+import LandingScreen from '../components/landing/LandingScreen';
 
 export default function Index() {
   return (
-    <Landing />
+    <LandingScreen />
   );
 };

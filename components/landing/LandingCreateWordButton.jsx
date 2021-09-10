@@ -1,23 +1,28 @@
-import { landingWordListAddWord } from '../../redux/landing/actions/landingWordListActions';
-import { useDispatch, useSelector } from 'react-redux';
-import { landingTextFieldClearWord } from '../../redux/landing/actions/landingTextFieldActions';
-import { AddCircleRounded } from '@material-ui/icons';
+import { Button, makeStyles } from '@material-ui/core';
+import { useRouter } from 'next/dist/client/router';
+
+const useStyles = makeStyles(() => ({
+  root: {
+    width: "100%"
+  },
+}));
 
 export default function LandingCreateWordButton() {
-  const word = useSelector(state => state.landingTextFieldReducer)
-  const dispatch = useDispatch();
+  const classes = useStyles();
+  const router = useRouter();
 
-  const handleAddWord = (e) => {
-    e.preventDefault()
-    if (word) {
-      dispatch(landingWordListAddWord(word))
-      dispatch(landingTextFieldClearWord())
-    }
+  const goToEditText = (e) => {
+    e.preventDefault();
+    router.push("/edit");
   }
 
   return (
-    <AddCircleRounded
+    <Button
+      className={classes.root}
+      variant="outlined"
       color="primary"
-      onClick={handleAddWord}/>
+      onClick={goToEditText}>
+      Create Word
+    </Button>
   );
 }
