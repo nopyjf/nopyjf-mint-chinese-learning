@@ -17,7 +17,7 @@ export default function GameWord({ words }) {
   const router = useRouter();
 
   if (words.length == 0) {
-    router.push('/');
+    router.push("/");
   }
 
   return (
