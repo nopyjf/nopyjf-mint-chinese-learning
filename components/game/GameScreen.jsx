@@ -7,7 +7,7 @@ import GameWord from "./GameWord";
 export default function GameScreen() {
   const gameWordList = useSelector((state) => state.gameWordListReducer);
   const landingWordList = useSelector((state) => state.landingWordListReducer);
-
+  
   return (
     <Box component="div">
       <GameAppBar />

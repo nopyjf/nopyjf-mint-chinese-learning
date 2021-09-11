@@ -1,6 +1,6 @@
 import { Grid, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { gameWordListRemoveWord } from '../../redux/landing/actions/gameWordListActions';
 
@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 export default function GameChoice({gameWords, landingWords}) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const randomChoice = (gameWords, landingWords) => {
     var choices = [];
@@ -39,6 +40,9 @@ export default function GameChoice({gameWords, landingWords}) {
     e.preventDefault();
     if (gameWords && id == gameWords[0].id) {
       dispatch(gameWordListRemoveWord(id));
+      if (gameWords.length == 1) {
+        router.back();
+      }
     }
   }
 
