@@ -15,8 +15,14 @@ const theme = createTheme({
     },
     background: {
       default: '#fff',
-    },
+    }
   },
+  typography: {
+    fontFamily: [
+      'Prompt',
+      'sans-serif'
+    ].join(',')
+  }
 });
 
 export default theme;

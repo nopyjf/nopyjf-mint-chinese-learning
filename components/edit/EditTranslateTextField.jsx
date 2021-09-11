@@ -22,7 +22,7 @@ export default function EditTranslateTextField() {
   return (
     <TextField
       className={classes.textField}
-      label={"Please insert translated word here"}
+      label={"เพิ่มคำแปล"}
       variant="outlined"
       value={word.translate}
       onChange={updateWord} />

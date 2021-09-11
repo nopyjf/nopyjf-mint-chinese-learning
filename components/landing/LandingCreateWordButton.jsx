@@ -22,7 +22,7 @@ export default function LandingCreateWordButton() {
       variant="outlined"
       color="primary"
       onClick={goToEditText}>
-      Create Word
+      สร้่างคำศัพท์
     </Button>
   );
 }

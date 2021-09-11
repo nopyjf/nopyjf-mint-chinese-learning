@@ -9,10 +9,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function EditChineseTextField() {
+export default function EditChineseTextField({ word }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const word = useSelector(state => state.editTextFieldReducer);
 
   const updateWord = (e) => {
     e.preventDefault();
@@ -22,7 +21,7 @@ export default function EditChineseTextField() {
   return (
     <TextField
       className={classes.textField}
-      label={"Please insert Chinese word here"}
+      label={"เพิ่มคำศัพท์จีน"}
       variant="outlined"
       value={word.chinese}
       onChange={updateWord} />

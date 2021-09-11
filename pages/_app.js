@@ -5,11 +5,10 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../src/theme';
 import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
+import { createStore } from 'redux';
 import rootReducer from '../redux/rootReducers';
-import logger from 'redux-logger';
 
-const store = createStore(rootReducer, applyMiddleware(logger));
+const store = createStore(rootReducer);
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;

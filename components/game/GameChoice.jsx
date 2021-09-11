@@ -1,9 +1,8 @@
 import { Grid, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useSelector, useDispatch } from 'react-redux';
-
-var dispatch = null;
-var word = null;
+import { useRouter } from 'next/dist/client/router';
+import { useDispatch } from 'react-redux';
+import { gameWordListRemoveWord } from '../../redux/landing/actions/gameWordListActions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,10 +17,30 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function GameChoice() {
+export default function GameChoice({gameWords, landingWords}) {
   const classes = useStyles();
-  dispatch = useDispatch();
-  word = useSelector(state => state.gameWordListReducer);
+  const dispatch = useDispatch();
+
+  const randomChoice = (gameWords, landingWords) => {
+    var choices = [];
+    const correctWord = gameWords ? gameWords[0] : null;
+
+    if (correctWord) {
+      choices.push(correctWord);
+      const filterOutCorrectWords = landingWords.filter((word) => word.id != correctWord.id);
+      choices.push(filterOutCorrectWords[Math.floor(Math.random() * filterOutCorrectWords.length)]);
+      choices.push(filterOutCorrectWords[Math.floor(Math.random() * filterOutCorrectWords.length)]);
+    }
+
+    return choices;
+  }
+
+  const selectChoice = (e, id) => {
+    e.preventDefault();
+    if (gameWords && id == gameWords[0].id) {
+      dispatch(gameWordListRemoveWord(id));
+    }
+  }
 
   return (
     <>
@@ -31,21 +50,17 @@ export default function GameChoice() {
         direction="row"
         justifyContent="space-between"
         alignItems="center">
-        <Grid item>
-          <Paper variant="outlined" className={classes.card}>
-            <Typography variant="h5">One</Typography>
-          </Paper>
-        </Grid>
-        <Grid item>
-          <Paper variant="outlined" className={classes.card}>
-            <Typography variant="h5">Two</Typography>
-          </Paper>
-        </Grid>
-        <Grid item >
-          <Paper variant="outlined" className={classes.card}>
-            <Typography variant="h5">Three</Typography>
-          </Paper>
-        </Grid>
+        {
+          randomChoice(gameWords, landingWords).map((word) => {
+            return (
+              <Grid item>
+                <Paper onClick={(e) => selectChoice(e, word.id) } variant="outlined" className={classes.card}>
+                  <Typography variant="h5">{ word.translate }</Typography>
+                </Paper>
+              </Grid>
+            );
+          })
+        }
       </Grid>
     </>
   );

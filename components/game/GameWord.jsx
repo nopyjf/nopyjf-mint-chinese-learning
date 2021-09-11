@@ -1,5 +1,6 @@
 import { Box, Container, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { useRouter } from 'next/dist/client/router';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -13,14 +14,17 @@ const useStyles = makeStyles(() => ({
 
 export default function GameWord({ words }) {
   const classes = useStyles();
+  const router = useRouter();
+
+  if (words.length == 0) {
+    router.push('/');
+  }
 
   return (
     <>
-      {
-        <Box component="div" className={classes.root}>
-          <Typography variant="h1" className={classes.root}>{ words?.data[0]?.chinese }</Typography>
-        </Box>
-      }
+      <Box component="div" className={classes.root}>
+        <Typography variant="h1" className={classes.root}>{ words.length > 0 ? words[0].chinese : null }</Typography>
+      </Box>
     </>
   );
 }

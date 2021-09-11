@@ -9,8 +9,7 @@ import { Delete } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 import { landingWordListRemoveWord } from '../../redux/landing/actions/landingWordListActions';
 
-export default function LandingWordList() {
-  const wordList = useSelector(state => state.landingWordListReducer);
+export default function LandingWordList({ wordList }) {
   const dispatch = useDispatch();
 
   const removeWord = (e, id) => {

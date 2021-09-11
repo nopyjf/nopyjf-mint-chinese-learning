@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Typography, Toolbar, Button } from '@material-ui/core';
 import { useRouter } from 'next/dist/client/router';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { gameWordListCreateData } from '../../redux/landing/actions/gameWordListActions';
 
 const useStyles = makeStyles(() => ({
@@ -11,11 +10,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function LandingAppBar() {
+export default function LandingAppBar({ wordList }) {
   const classes = useStyles();
   const router = useRouter();
   const dispatch = useDispatch();
-  const wordList = useSelector(state => state.landingWordListReducer);
 
   const goToGameScreen = (e) => {
     e.preventDefault();
@@ -27,9 +25,11 @@ export default function LandingAppBar() {
     <AppBar>
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
-          App
+          เกมทายศัพท์จีน
         </Typography>
-        <Button color="inherit" onClick={goToGameScreen}>Start</Button>
+        {
+          wordList.data.length < 3 ? null : <Button color="inherit" onClick={goToGameScreen}>Start</Button>  
+        }
       </Toolbar>
     </AppBar>
   );

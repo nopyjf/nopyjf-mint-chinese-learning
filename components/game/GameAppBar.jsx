@@ -4,6 +4,9 @@ const useStyles = makeStyles(() => ({
   title: {
     flexGrow: 1,
   },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
 }));
 
 export default function GameAppBar() {
@@ -13,7 +16,7 @@ export default function GameAppBar() {
     <AppBar>
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
-          Game
+          ทายคำศัพท์
         </Typography>
       </Toolbar>
     </AppBar>

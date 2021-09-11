@@ -1,9 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { Toolbar, Typography, Button, AppBar } from '@material-ui/core';
+import { Toolbar, Typography, Button, AppBar, IconButton } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { landingWordListAddWord } from '../../redux/landing/actions/landingWordListActions';
 import { editTextFieldClearWord } from '../../redux/landing/actions/editTextFieldActions';
 import { useRouter } from 'next/dist/client/router';
+import { ArrowBack } from '@material-ui/icons';
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -11,19 +12,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function EditAppBar() {
+export default function EditAppBar({ word }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const router = useRouter();
-  const word = useSelector(state => state.editTextFieldReducer);
-
-  const isAlphabet = (word) => {
-    let reg = /^[a-zA-Z]+$/;
-    return word && reg.test(word);
-  }
   
   const isShownButtonAppBar = (word) => {
-    return isAlphabet(word.chinese) && isAlphabet(word.translate)
+    return word.chinese && word.translate
   }
   
   const addWord = (e) => {
@@ -38,7 +33,7 @@ export default function EditAppBar() {
       <Button
         color="inherit"
         onClick={addWord}>
-        OK
+        ตกลง
       </Button>
     )
   }
@@ -46,8 +41,16 @@ export default function EditAppBar() {
   return (
     <AppBar>
       <Toolbar>
+        <IconButton 
+          edge="start" 
+          className={classes.menuButton} 
+          color="inherit" 
+          aria-label="back"
+          onClick={() => {router.back()}}>
+          <ArrowBack />
+        </IconButton>
         <Typography variant="h6" className={classes.title}>
-          Create Word
+          เพิ่มคำศัพท์
         </Typography>
         { 
           isShownButtonAppBar(word) ? buttonAppBar() : null
