@@ -3,16 +3,10 @@ import { useSelector } from "react-redux";
 import GameAppBar from "./GameAppBar";
 import GameChoice from "./GameChoice";
 import GameWord from "./GameWord";
-import { useRouter } from 'next/dist/client/router';
 
 export default function GameScreen() {
   const gameWordList = useSelector((state) => state.gameWordListReducer);
   const landingWordList = useSelector((state) => state.landingWordListReducer);
-  const router = useRouter();
-
-  if (!gameWordList) {
-    router.push("/");
-  }
 
   return (
     <Box component="div">
