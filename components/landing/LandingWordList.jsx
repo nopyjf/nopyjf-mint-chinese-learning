@@ -8,13 +8,30 @@ import { useSelector } from 'react-redux';
 import { Delete } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 import { landingWordListRemoveWord } from '../../redux/landing/actions/landingWordListActions';
+import { LANDING_WORD_LIST_STORAGE } from '../../src/storage';
 
 export default function LandingWordList({ wordList }) {
   const dispatch = useDispatch();
 
+  const hasWindow = () => typeof window !== "undefined";
+
+  const setLocalWordList = (wordList, id) => {
+    if (hasWindow()) {
+      window.localStorage.setItem(LANDING_WORD_LIST_STORAGE, JSON.stringify({
+        id: wordList.id,
+        data: [
+          ...wordList.data.filter((word) => {
+            return word.id !== id
+          })
+        ]
+      }));
+    }
+  }
+
   const removeWord = (e, id) => {
     e.preventDefault();
     dispatch(landingWordListRemoveWord(id));
+    setLocalWordList(wordList, id);
   }
 
   const getListItem = (word) => {

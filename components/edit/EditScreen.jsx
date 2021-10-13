@@ -5,11 +5,12 @@ import EditChineseTextField from "./EditChineseTextField";
 import EditTranslateTextField from "./EditTranslateTextField";
 
 export default function EditScreen() {
+  const wordList = useSelector((state) => state.landingWordListReducer);
   const word = useSelector((state) => state.editTextFieldReducer);
 
   return (
     <Box component="div">
-      <EditAppBar word={word} />
+      <EditAppBar word={word} wordList={wordList}/>
       <Container maxWidth="xs">
         <Box component="div" mt={8} mb={2} pt={2}>
           <EditChineseTextField word={word} />
