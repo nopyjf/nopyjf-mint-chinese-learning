@@ -5,14 +5,17 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../src/theme';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import rootReducer from '../redux/rootReducers';
+import logger from 'redux-logger';
 
-const store = createStore(rootReducer);
+const middleware = [];
 
-export default function MyApp(props) {
-  const { Component, pageProps } = props;
+const appApplyMiddleware = [logger];
 
+const store = createStore(rootReducer, applyMiddleware(...appApplyMiddleware));
+
+export default function MyApp ({ Component, pageProps }) {
   React.useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');

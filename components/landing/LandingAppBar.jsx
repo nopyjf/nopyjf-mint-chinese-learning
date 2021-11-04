@@ -18,7 +18,7 @@ export default function LandingAppBar({ wordList }) {
   const goToGameScreen = (e) => {
     e.preventDefault();
     dispatch(gameWordListCreateData(wordList.data))
-    router.push("/game");
+    router.push("/game/custom");
   }
 
   return (

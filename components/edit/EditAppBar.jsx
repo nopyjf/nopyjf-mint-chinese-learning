@@ -6,7 +6,7 @@ import {
   AppBar,
   IconButton,
 } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { landingWordListAddWord } from "../../redux/landing/actions/landingWordListActions";
 import { editTextFieldClearWord } from "../../redux/landing/actions/editTextFieldActions";
 import { useRouter } from "next/dist/client/router";

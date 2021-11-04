@@ -1,6 +1,6 @@
 import { TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { editTextFieldUpdateWord } from '../../redux/landing/actions/editTextFieldActions';
 
 const useStyles = makeStyles(() => ({

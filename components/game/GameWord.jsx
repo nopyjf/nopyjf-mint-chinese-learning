@@ -1,5 +1,6 @@
 import { Box, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -11,13 +12,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function GameWord({ words }) {
+export default function GameWord({ data }) {
   const classes = useStyles();
+  const word = data.words.length ? data.words[0].chinese : null
 
   return (
     <>
       <Box component="div" className={classes.root}>
-        <Typography variant="h1" className={classes.root}>{ words.length > 0 ? words[0].chinese : null }</Typography>
+        <Typography variant="h1" className={classes.root}>{ word }</Typography>
       </Box>
     </>
   );

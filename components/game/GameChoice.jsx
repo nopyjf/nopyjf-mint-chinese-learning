@@ -17,30 +17,38 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function GameChoice({gameWords, landingWords}) {
+export default function GameChoice({ data }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const randomChoice = (gameWords, landingWords) => {
-    var choices = [];
-    const correctWord = gameWords ? gameWords[0] : null;
+  const randomChoice = (words, choices) => {
+    var selectedChoices = [];
+    const correctWord = words.length ? words[0] : null;
 
     if (correctWord) {
-      choices.push(correctWord);
-      const filterOutCorrectWords = landingWords.filter((word) => word.id != correctWord.id);
-      choices.push(filterOutCorrectWords[Math.floor(Math.random() * filterOutCorrectWords.length)]);
-      choices.push(filterOutCorrectWords[Math.floor(Math.random() * filterOutCorrectWords.length)]);
+      selectedChoices.push(correctWord);
+      const filterOutCorrectWords = choices.filter((word) => word.id != correctWord.id);
+      selectedChoices.push(filterOutCorrectWords[Math.floor(Math.random() * filterOutCorrectWords.length)]);
+      selectedChoices.push(filterOutCorrectWords[Math.floor(Math.random() * filterOutCorrectWords.length)]);
     }
 
     return choices;
   }
 
+  const isCorrectWord = (selectedId, words) => {
+    return words && selectedId == words[0]?.id;
+  };
+
+  const isFirstChoiceCorrect = (words, choices) => {
+    return words.length == choices.length;
+  }
+
   const selectChoice = (e, id) => {
     e.preventDefault();
-    if (gameWords && id == gameWords[0].id) {
+    if (isCorrectWord(id, data.words)) {
       dispatch(gameWordListRemoveWord(id));
-      if (gameWords.length == 1) {
+      if (data.words.length == 1) {
         router.back();
       }
     }
@@ -55,7 +63,7 @@ export default function GameChoice({gameWords, landingWords}) {
         justifyContent="space-between"
         alignItems="center">
         {
-          randomChoice(gameWords, landingWords).map((word) => {
+          randomChoice(data.words, data.choices).map((word) => {
             return (
               <Grid item>
                 <Paper onClick={(e) => selectChoice(e, word.id) } variant="outlined" className={classes.card}>
